@@ -4,6 +4,15 @@ import BasicTreasureList from '../components/BasicTreasureList';
 
 
 export default function NewSection() {
+  const [movies, setMovies] = React.useState([]);
+
+  
+  React.useEffect(() => {
+    const results = fetch("/.netlify/functions/get-movies").then(response => response.json());
+
+    console.log(results);
+  }, []);
+
   const treasures = [{
     title: 'Treasure 1',
     image: 'https://example.com/treasure1.jpg'
