@@ -9,8 +9,8 @@ export default function NewSection() {
 
   
   React.useEffect(() => {
-    fetch("/.netlify/functions/get-movies").then(response => {
-      results = response.json();
+    fetch("/.netlify/functions/get_movies").then(response => {
+      const results = response.json();
       console.log(results);
     });
   }, []);
