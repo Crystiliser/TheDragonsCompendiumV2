@@ -5,6 +5,10 @@ const mongoClient = new MongoClient(process.env.MONGODB_URI);
 const clientPromise = mongoClient.connect();
 
 const handler = async (event) => {
+    if (event.httpMethod !== 'GET') {
+        return { statusCode: 405, body: "Method Not Allowed" };
+    }
+    
     try {
         const database = (await clientPromise).db(process.env.MONGODB_DATABASE);
         const collection = database.collection(process.env.MONGODB_COLLECTION);

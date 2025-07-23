@@ -1,3 +1,4 @@
+'use client';
 import React from 'react';
 import { Paper, Typography } from '@mui/material';
 import BasicTreasureList from '../components/BasicTreasureList';
@@ -8,9 +9,10 @@ export default function NewSection() {
 
   
   React.useEffect(() => {
-    const results = fetch("/.netlify/functions/get-movies").then(response => response.json());
-
-    console.log(results);
+    fetch("/.netlify/functions/get-movies").then(response => {
+      results = response.json();
+      console.log(results);
+    });
   }, []);
 
   const treasures = [{
