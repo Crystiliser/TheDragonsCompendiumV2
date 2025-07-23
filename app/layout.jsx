@@ -18,7 +18,9 @@ export default function RootLayout({ children }) {
             </head>
             <body className="antialiased text-white bg-blue-900">
                 <div>
-                    <LayoutDrawer children={children} />
+                    <LayoutDrawer>
+                        {children}
+                    </LayoutDrawer>
                 </div>
             </body>
         </html>
