@@ -9,22 +9,26 @@ export default function NewSection() {
 
   
   React.useEffect(() => {
-    fetch("/.netlify/functions/get_movies").then(response => {
-      const results = response.json();
-      console.log(results);
-    });
+    const fetchData = async () => {
+      try {
+        const response = await fetch('/.netlify/functions/get_movies');
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        const data = await response.json();
+        setMovies(data.map(movie => ({
+          id: movie._id,
+          title: movie.title,
+          image: movie.poster || 'https://via.placeholder.com/150'
+        })));
+      } catch (error) {
+        console.error('Error fetching movies:', error);
+      }
+    };
+
+    fetchData();
   }, []);
 
-  const treasures = [{
-    title: 'Treasure 1',
-    image: 'https://example.com/treasure1.jpg'
-  }, {
-    title: 'Treasure 2',
-    image: 'https://example.com/treasure2.jpg'
-  }, {
-    title: 'Treasure 3',
-    image: 'https://example.com/treasure3.jpg'
-  }];
 
   return (
     <div>
@@ -32,7 +36,7 @@ export default function NewSection() {
         New Content
       </Typography>
       <Paper elevation={3}>
-        <BasicTreasureList treasures={treasures}/>
+        <BasicTreasureList treasures={movies}/>
       </Paper>
     </div>
   );

@@ -17,7 +17,7 @@ export default function BasicTreasureList(props) {
       }}
     >
       {treasures.map(image => (
-        <ImageListItem key={image.title}>
+        <ImageListItem key={image.id}>
           <img
             src={image.image}
             alt={image.title}
